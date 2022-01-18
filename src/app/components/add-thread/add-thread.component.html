@@ -1,0 +1,34 @@
+<div class="content">
+    <h4>Aggiungi post</h4>
+    <button (click)="showAddThread = true">Aggiungi</button>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal" *ngIf="showAddThread">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" (click)="showAddThread = false">&times;</span>
+
+<!--        USED TO AVOID AUTOCOMPLETE-->
+        <input id="username" style="display:none" type="text" name="fakeusernameremembered">
+        <input id="password" style="display:none" type="password" name="fakepasswordremembered">
+        <div>
+            <label for="url-field">Url del post<br></label>
+            <input type="text"
+                   id="url-field"
+                   placeholder="Inserisci l'url di un post di reddit"
+                   [(ngModel)]="url"
+                   (focus)="cleanError()"
+                   autocomplete="nope">
+            <p *ngIf="error" class="error">{{error}}</p>
+        </div>
+        <label for="pswd-field">Password<br></label>
+        <input type="password" id="pswd-field" placeholder="Inserisci la password" [(ngModel)]="password" autocomplete="off">
+        <p *ngIf="passwordError" class="error">{{passwordError}}</p>
+        <div>
+        <button (click)="addThread()">Aggiungi</button>
+        </div>
+    </div>
+
+</div>

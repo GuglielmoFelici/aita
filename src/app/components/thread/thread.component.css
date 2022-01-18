@@ -1,0 +1,115 @@
+p, h4, span {
+    font-family: "Noto Sans";
+    white-space: pre-wrap;
+}
+
+* {
+    background-color: #1a1a1b;
+    color: #d4d7d9;
+}
+
+i {
+    color: #d4d7d9;
+}
+
+.fa-arrow-up {
+    color: orangered;
+}
+
+.fa-times {
+    color: red;
+}
+
+.link {
+    padding-left: 6px;
+    padding-right: 12px;
+    font-size: small;
+    margin-top: 12px;
+    color: aqua;
+}
+
+.link:hover {
+    cursor: pointer;
+}
+
+.delete-btn {
+    background-color: red;
+    margin-top: 12px;
+}
+
+.title-button {
+    margin: 0 15px 15px 0;
+    display: inline;
+}
+
+.accordion {
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+    margin: 0 12px;
+}
+
+@media screen and (min-width: 640px) {
+    .accordion {
+        max-width: 70%;
+
+    }
+}
+
+.title {
+    padding: 1px 2px 12px 12px;
+    cursor: pointer;
+}
+
+.content {
+    padding: 12px 0 0 12px;
+}
+
+.content-container {
+    overflow: hidden;
+    max-height: 0;
+}
+
+.content-container.opened {
+    max-height: none;
+}
+
+/* The Modal (background) */
+.modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #1a1a1b;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+}
+
+@media screen and (min-width: 640px) {
+    .modal-content {
+        width: 40%;
+    }
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -1,0 +1,44 @@
+<div class="accordion" *ngIf="thread">
+    <div class="title" (click)="opened = !opened">
+        <h4>{{thread.post.data.title}}</h4>
+        <div class="title-button">
+            <i class="fa fa-arrow-up"></i>
+            <span> {{thread.post.data.score}}</span>
+        </div>
+        ...
+    </div>
+    <div class="content-container" [class.opened]="opened">
+        <div class="content">
+            <ng-container *ngIf="thread.id">
+                <i class="fa fa-external-link"></i>
+                <a class="link" (click)="viewOnReddit()">Visualizza il post su reddit</a>
+                <i class="fa fa-times"></i>
+                <a class="link" (click)="showDelete = true">Elimina</a>
+            </ng-container>
+            <p>{{thread.post.data.selftext}}</p>
+        </div>
+<!--        <a class="link">Visualizza commenti</a> TODO -->
+    </div>
+</div>
+<p *ngIf="!thread">Caricamento...</p>
+
+<!-- The Modal -->
+<div id="myModal" class="modal" *ngIf="showDelete">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" (click)="showDelete = false">&times;</span>
+        <h4>Eliminare il post?</h4>
+
+        <!--        USED TO AVOID AUTOCOMPLETE-->
+        <input id="username" style="display:none" type="text" name="fakeusernameremembered">
+        <input id="password" style="display:none" type="password" name="fakepasswordremembered">
+        <label for="pswd-field">Password<br></label>
+        <input type="password" id="pswd-field" placeholder="Inserisci la password" [(ngModel)]="password" autocomplete="off">
+        <p *ngIf="passwordError" class="error">{{passwordError}}</p>
+        <div>
+            <button  class="delete-btn" (click)="deleteThread()">Elimina</button>
+        </div>
+    </div>
+
+</div>

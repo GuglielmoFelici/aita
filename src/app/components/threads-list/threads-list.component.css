@@ -1,0 +1,16 @@
+* {
+    color: #d4d7d9;
+    margin-left: 12px;
+}
+
+h4 {
+    margin-top: 36px;
+}
+
+input {
+    background-color: #1a1a1b;
+    width: 100%;
+    max-width: 640px;
+    margin-right: 12px;
+    margin-bottom: 24px;
+}

@@ -1,0 +1,4 @@
+<h4>Post salvati</h4>
+<input type="text" placeholder="Cerca..." [(ngModel)]="searchFilter">
+<app-thread *ngFor="let thread of shownThreads" [thread]="thread" (threadDeleted)="deleteThread($event)"></app-thread>
+<p *ngIf="threads.length+failures < postIds.length">Caricamento...</p>
