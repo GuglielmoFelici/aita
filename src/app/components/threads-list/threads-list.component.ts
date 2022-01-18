@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Thread} from "../../models";
 import {AitaService} from "../../aita.service";
 import {finalize} from "rxjs/operators";
-import {Subject} from "rxjs";
+import {interval, Subject} from "rxjs";
 
 @Component({
     selector: 'app-threads-list',
@@ -24,17 +24,7 @@ export class ThreadsListComponent implements OnInit {
     ngOnInit(): void {
         this.aitaService.getPosts().subscribe(
             posts => {
-                this.postIds = posts
-                posts.forEach(p =>
-                    this.aitaService.getRedditPost(p).subscribe(
-                        post => {
-                            this.threads.push(post)
-                        },
-                        _ => {
-                            this.failures++;
-                        }
-                    )
-                )
+                this.loadThreads(posts)
             }
         )
         if (this.addThread) {
@@ -45,6 +35,31 @@ export class ThreadsListComponent implements OnInit {
                 }
             )
         }
+        // check for new posts every 10 seconds
+        interval(10000).subscribe(
+            _ => this.aitaService.getPosts().subscribe(
+                posts => {
+                    if (JSON.stringify(posts) !== JSON.stringify(this.postIds)) {
+                        this.loadThreads(posts);
+                    }
+                }
+            )
+        )
+    }
+
+    loadThreads(posts: string[]) {
+        this.postIds = posts
+        this.threads = []
+        posts.forEach(p =>
+            this.aitaService.getRedditPost(p).subscribe(
+                post => {
+                    this.threads.push(post)
+                },
+                _ => {
+                    this.failures++;
+                }
+            )
+        )
     }
 
     get shownThreads() {
