@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Comment, Listing, Post, Thread} from "./models";
+import {Comment, Listing, Post, Thread, ThreadSimple} from "./models";
 import {environment} from "../environments/environment";
 import {catchError, map} from "rxjs/operators";
 
@@ -16,8 +16,8 @@ export class AitaService {
     constructor(private http: HttpClient) {
     }
 
-    public getPosts(): Observable<string[]> {
-        return this.http.get<string[]>(`${this.baseUrl}/posts`)
+    public getPosts(): Observable<ThreadSimple[]> {
+        return this.http.get<ThreadSimple[]>(`${this.baseUrl}/posts`)
     }
 
     public getRedditPost(id: string): Observable<Thread> {
@@ -30,9 +30,9 @@ export class AitaService {
         );
     }
 
-    addPost(threadId: string, password: string): Observable<string> {
+    addPost(threadId: string, password: string): Observable<ThreadSimple> {
         const headers = new HttpHeaders().set('password', password)
-        return this.http.post<string>(`${this.baseUrl}/posts/${threadId}`, {}, {headers})
+        return this.http.post<ThreadSimple>(`${this.baseUrl}/posts/${threadId}`, {}, {headers})
     }
 
     deletePost(threadId: string, password: string) {

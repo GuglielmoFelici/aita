@@ -1,4 +1,5 @@
 import {Component, EventEmitter} from '@angular/core';
+import {ThreadSimple} from "./models";
 
 @Component({
     selector: 'app-root',
@@ -8,9 +9,9 @@ import {Component, EventEmitter} from '@angular/core';
 export class AppComponent {
     title = 'angular';
 
-    newThread = new EventEmitter<string>();
+    newThread = new EventEmitter<ThreadSimple>();
 
-    addThread(tid: string) {
-        this.newThread.emit(tid)
+    addThread(t: ThreadSimple) {
+        this.newThread.emit(t)
     }
 }

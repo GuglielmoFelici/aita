@@ -1,26 +1,27 @@
-<div class="accordion" *ngIf="thread">
+<div class="accordion" *ngIf="threadSimple && show">
     <div class="title" (click)="opened = !opened">
-        <h4>{{thread.post.data.title}}</h4>
+        <h4>{{threadSimple.title}}</h4>
         <div class="title-button">
             <i class="fa fa-arrow-up"></i>
-            <span> {{thread.post.data.score}}</span>
+            <span> {{threadSimple.score}}</span>
         </div>
         ...
     </div>
     <div class="content-container" [class.opened]="opened">
         <div class="content">
-            <ng-container *ngIf="thread.id">
-                <i class="fa fa-external-link"></i>
-                <a class="link" (click)="viewOnReddit()">Visualizza il post su reddit</a>
+            <ng-container *ngIf="threadSimple.id">
+                <i class="fa fa-link"></i>
+                <a class="link" [href]="'https://www.reddit.com/'+this.threadSimple?.id">Visualizza il post su reddit</a>
                 <i class="fa fa-times"></i>
                 <a class="link" (click)="showDelete = true">Elimina</a>
             </ng-container>
-            <p>{{thread.post.data.selftext}}</p>
+            <p *ngIf="fullThread">{{fullThread.post.data.selftext}}</p>
+            <p *ngIf="!fullThread">Caricamento...</p>
         </div>
 <!--        <a class="link">Visualizza commenti</a> TODO -->
     </div>
 </div>
-<p *ngIf="!thread">Caricamento...</p>
+<p *ngIf="!threadSimple">Caricamento...</p>
 
 <!-- The Modal -->
 <div id="myModal" class="modal" *ngIf="showDelete">

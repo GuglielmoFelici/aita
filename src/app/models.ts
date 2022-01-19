@@ -31,3 +31,9 @@ export interface Listing<T> extends RedditObject {
         children: T[]
     }
 }
+
+export interface ThreadSimple {
+    id: string,
+    title: string,
+    score: number,
+}

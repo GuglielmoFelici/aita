@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AitaService} from "../../aita.service";
+import {ThreadSimple} from "../../models";
 
 @Component({
     selector: 'app-add-thread',
@@ -11,7 +12,7 @@ export class AddThreadComponent implements OnInit {
     url: string = '';
     error = '';
     passwordError = '';
-    @Output() newThread = new EventEmitter<string>();
+    @Output() newThread = new EventEmitter<ThreadSimple>();
     showAddThread = false;
     password: string = '';
 

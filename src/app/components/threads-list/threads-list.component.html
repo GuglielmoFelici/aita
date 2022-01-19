@@ -1,5 +1,3 @@
 <h4>Post salvati</h4>
-<input *ngIf="postIds.length !== 0" type="text" placeholder="Cerca..." [(ngModel)]="searchFilter">
-<app-thread *ngFor="let thread of shownThreads" [thread]="thread" (threadDeleted)="deleteThread($event)"></app-thread>
-<p *ngIf="threads.length+failures < postIds.length">Caricamento...</p>
-<p *ngIf="postIds.length === 0">Nessun post.</p>
+<input *ngIf="threadSimples.length !== 0" type="text" placeholder="Cerca..." [(ngModel)]="searchFilter">
+<app-thread *ngFor="let thread of threadSimples" [threadSimple]="thread" (threadDeleted)="deleteThread($event)" [show]="isShown(thread)"></app-thread>

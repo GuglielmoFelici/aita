@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Thread} from "../../models";
+import {Thread, ThreadSimple} from "../../models";
 import {AitaService} from "../../aita.service";
 
 @Component({
@@ -9,29 +9,32 @@ import {AitaService} from "../../aita.service";
 })
 export class ThreadComponent implements OnInit {
 
-    @Input() thread: Thread | undefined;
+    @Input() threadSimple: ThreadSimple | undefined;
+    @Input() show = true;
+    fullThread: Thread | undefined;
 
     opened = false;
     showDelete = false;
     password: string = '';
     passwordError: string = '';
-    @Output() threadDeleted = new EventEmitter<Thread>()
+    @Output() threadDeleted = new EventEmitter<ThreadSimple>()
 
     constructor(private aitaService: AitaService) {
     }
 
     ngOnInit(): void {
-    }
-
-    viewOnReddit() {
-        window.open(`https://www.reddit.com/${this.thread?.id}`, '_blank');
+        if (this.threadSimple) {
+            this.aitaService.getRedditPost(this.threadSimple.id).subscribe(
+                fullThread => this.fullThread = fullThread
+            )
+        }
     }
 
     deleteThread() {
-        if (this.thread?.id) {
-            this.aitaService.deletePost(this.thread?.id, this.password).subscribe(
+        if (this.threadSimple?.id) {
+            this.aitaService.deletePost(this.threadSimple.id, this.password).subscribe(
                 _ => {
-                    this.threadDeleted.emit(this.thread)
+                    this.threadDeleted.emit(this.threadSimple)
                     this.showDelete = false
                 },
                 error => {
